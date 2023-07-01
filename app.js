@@ -3,22 +3,43 @@ new Vue({
   el: '#app',
   template: `
   <div>
-    <h1 v-if = "present" v-bind:class='{danger:isDanger, success:!isDanger}'> 
-        {{blog.author}}
-    </h1>
-    <h3 v-else> Author not found </h3>
-    <h1> {{blog.title}}</h1>
+    <ul v-bind:class='className'>
+       <li v-for='blog in blogs'> 
+        <div>Author: {{blog.author}}</div>
+        <div>Title: {{blog.title}}</div>
+       </li>
+    </ul>
+    <input v-model='blog'></input>
+    <button @click='addBlog'> Add Blog </button>
+
   </div>
   `,
   data: {
-    blog: { author: 'Narendra', title: 'Live Session' },
     blogs: [
       { author: 'Narendra', title: 'Live Session' },
       { author: 'Narendra 2', title: 'Live Session 2' },
     ],
-    present: true,
-    nPresent: false,
-    isDanger: true,
-    isSuccess: false,
+    blog: null,
+    className: 'danger',
+  },
+  methods: {
+    increeseCount() {
+      this.b += 2
+    },
+    addBlog() {
+      const newBlog = { author: 'Narendra3', title: this.blog }
+      this.blogs.push(newBlog)
+    },
+  },
+  computed: {
+    sum() {
+      return this.a + this.b
+    },
+  },
+  watch: {
+    b(newVal, oldVal) {
+      const change = newVal - oldVal
+      console.log(change)
+    },
   },
 })
