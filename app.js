@@ -1,19 +1,18 @@
-// Global vue component
-Vue.component('my-first-component', {
-  template: `<div> From the first component {{message}} </div>`,
-  // Data should always be a function
-  // that returns object
+// Local vue component
+const localComp = {
+  template: `<div>{{message}}</div>`,
   data() {
     return {
-      message: 'Hello',
+      message: 'Hello from Local Component',
     }
   },
-})
+}
 
 new Vue({
   // options object
   el: '#app',
-  template: `<div><my-first-component />
-  <my-first-component />
-  </div>`,
+  template: `<div><local-comp /></div>`,
+  components: {
+    'local-comp': localComp,
+  },
 })
